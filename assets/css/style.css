@@ -1,0 +1,38 @@
+* {
+  box-sizing: border-box;
+}
+.cf {
+  overflow: auto;
+}
+.cf:before, .cf:after {
+  content: " ";
+  display: table;
+}
+.cf:after {
+  clear: both;
+}
+/**
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+.cf {
+  *zoom: 1;
+}
+body{
+  background: url(../images/geometry2.png);
+  color: #B5391B;
+}
+.jumbotron{
+  background: url(../images/kylo.png) no-repeat;
+  width: 100%;
+  height: auto;
+}
+.timer{
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+}
+.questions{
+  color: #5CA552;
+  text-align: center;
+}
