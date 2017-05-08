@@ -21,6 +21,7 @@
 body{
   background: url(../images/geometry2.png);
   color: #B5391B;
+  margin-bottom: 5em;
 }
 .jumbotron{
   background: url(../images/kylo.png) no-repeat;
