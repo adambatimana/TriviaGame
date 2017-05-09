@@ -1,12 +1,14 @@
 window.onload = function(){
 //Variables to be used in the game
-  var timer = 90;
+  var timer = 5;
   var intervalId;
   var timerDiv = $(".panel-body");
   var gameStage =$("#gameStage");
+  var gameOverdiv =$("#gameOver");
   var correctAnswer = 0;
   var wrongAnswer = 0;
   var notAnswered = 0;
+
 // =============================================================================
 //                          FUNCTIONS
 // =============================================================================
@@ -16,17 +18,18 @@ window.onload = function(){
 
         //hide gameStage
         gameStage.hide();
-
+        gameOverdiv.hide();
     }
 
-// run() to start timer
+    //TIMER set up
+    // run() to start timer
     function runTimer() {
 
       intervalId = setInterval(decrement, 1000);
 
     }
 
-//  The decrement function.
+    //  The decrement function.
     function decrement() {
 
       //  Decrease number by one.
@@ -39,9 +42,13 @@ window.onload = function(){
       //  Once number hits zero...
       if (timer === 0) {
 
+          stop();
+
           //  Alert the user that time is up.
           alert("Time is up young Padawan!");
-          stop();
+          gameOver();
+
+
        }
     }
 
@@ -52,8 +59,30 @@ window.onload = function(){
       clearInterval(intervalId);
 
     }
-// gameStart();
-runTimer();
+
+    //end of timer function gameOver()
+    function gameOver() {
+
+      var correctDiv = $(".correct");
+      var wrongDiv = $(".incorrect");
+      var unansweredDiv = $(".unanswered");
+
+
+      //hide gameStage
+      gameStage.hide();
+
+      //show gameOver
+      gameOverdiv.show();
+
+      //show correct incorrect and unanswered score
+      correctDiv.html(correctAnswer);
+      wrongDiv.html(wrongAnswer);
+      unansweredDiv.html(notAnswered);
+
+    }
+
+gameStart();
+// gameOver();
 
 
 
@@ -73,7 +102,7 @@ runTimer();
 // time runs out()
 
 
-//TIMER()
+
 
 // ***************** IF TIME SWAP OUT QUETSION PANELS *******************
 
@@ -87,6 +116,7 @@ runTimer();
 ///hide gameStage and show click to begin
  $("#begin").on("click", function () {
    gameStage.show();
+   runTimer();
  });
 
 //if, for question one, the correct answer is selected add point to correct answer counter
