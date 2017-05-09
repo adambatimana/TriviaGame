@@ -121,19 +121,23 @@ window.onload = function(){
    var notRight = "wrong";
 
    //if, for question one, the correct answer is selected add point to correct answer counter
-    if( selectedRadial.val() === right){
-      correctAnswer ++;
-      console.log("correct" + correctAnswer);
-    }
+   console.log(selectedRadial.val());
+   if( selectedRadial.val() === right){
+       correctAnswer ++;
+       // console.log("correct" + correctAnswer);
+   }
 
     //if, for question one, the incorrect answer is selected add point to wrong answer counter
-    if (selectedRadial.val() === notRight){
-      wrongAnswer ++;
-      console.log("wrong" + wrongAnswer);
+    else if (selectedRadial.val() === notRight){
+        wrongAnswer ++;
+        // console.log("wrong" + wrongAnswer);
+    }
+    //else, for question one, none are selected then  add point to not answered array
+    else if (selectedRadial.val() != notRight ||  selectedRadial.val() != right){
+        notAnswered ++;
+        // console.log("not anwswered " + notAnswered);
     }
 
-    //else, for question one, none are selected then  add point to not answered array
-    
 });
 
 
