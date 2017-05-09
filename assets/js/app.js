@@ -18,6 +18,7 @@ window.onload = function(){
 
         //hide gameStage
         gameStage.hide();
+
         gameOverdiv.hide();
     }
 
@@ -39,23 +40,18 @@ window.onload = function(){
       timerDiv.html(timer);
 
 
-      //  Once number hits zero...
+      // When the time runs out
       if (timer === 0) {
-
           stop();
-
-          //  Alert the user that time is up.
           alert("Time is up young Padawan!");
           gameOver();
-
-
        }
     }
 
     //  The stop function
     function stop() {
 
-    //  to the clearInterval function.
+      //  to the clearInterval function.
       clearInterval(intervalId);
 
     }
@@ -81,8 +77,7 @@ window.onload = function(){
 
     }
 
-gameStart();
-// gameOver();
+// gameStart();
 
 
 
@@ -99,12 +94,12 @@ gameStart();
 //checkWin()
 
 
-// time runs out()
 
 
 
 
-// ***************** IF TIME SWAP OUT QUETSION PANELS *******************
+
+// ***************** IF THERE IS TIME SWAP OUT QUETSION PANELS *******************
 
 
 
@@ -116,42 +111,43 @@ gameStart();
 ///hide gameStage and show click to begin
  $("#begin").on("click", function () {
    gameStage.show();
-   runTimer();
+  //  runTimer();
  });
 
-//if, for question one, the correct answer is selected add point to correct answer counter
+ $( "input" ).on( "click", function() {
 
+   var selectedRadial = $( "input:checked" );
+   var right = "correct";
+   var notRight = "wrong";
 
+   //if, for question one, the correct answer is selected add point to correct answer counter
+    if( selectedRadial.val() === right){
+      correctAnswer ++;
+      console.log("correct" + correctAnswer);
+    }
 
-//if, for question one, the incorrect answer is selected add point to wrong answer counter
+    //if, for question one, the incorrect answer is selected add point to wrong answer counter
+    if (selectedRadial.val() === notRight){
+      wrongAnswer ++;
+      console.log("wrong" + wrongAnswer);
+    }
 
-
-
-//else, for question one, none are selected then  add point to not answered array
-
-// on click event listener
-$(document).on("click", "button", function () {
-  //IF finish and submit button is pressed
-
-  //display correct, incorrect and unanswered selection in DOM and hide gameStage
+    //else, for question one, none are selected then  add point to not answered array
+    
 });
 
 
 
 
 
+// on click event listener
+$(".submit").on("click", function () {
 
+  //IF finish and submit button is pressed
+  //display correct, incorrect and unanswered selection in DOM and hide gameStage
+  gameOver();
+  stop();
 
-
-
-
-
-
-
-
-
-
-
-
+});
 
 }
