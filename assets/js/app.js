@@ -10,7 +10,7 @@ window.onload = function(){
   var unansweredDiv = $(".unanswered");
   var correctAnswer = 0;
   var wrongAnswer = 0;
-  var notAnswered = 0;
+  var notAnswered = 7;
 
 // =============================================================================
 //                          FUNCTIONS
@@ -86,12 +86,12 @@ window.onload = function(){
 
       correctAnswer = 0;
       wrongAnswer = 0;
-      notAnswered = 0;
+      notAnswered = 7;
 
       // clear selections on radio
-      var inp = $('input');
-        for (var i = inp.length-1; i>=0; i--) {
-          if ('radio'===inp[i].type) inp[i].checked = false;
+      var input = $('input');
+        for (var i = input.length-1; i>=0; i--) {
+          if ('radio'===input[i].type) input[i].checked = false;
         }
     }
 
@@ -109,8 +109,7 @@ window.onload = function(){
  $("#begin").on("click", function () {
    gameStage.show();
    $("#begin").hide();
-
-  //  runTimer();
+   runTimer();
  });
 
  $( "input" ).on( "click", function(event) {
@@ -125,6 +124,7 @@ window.onload = function(){
 
    if( selectedRadio.val() === right){
        correctAnswer ++;
+       notAnswered --;
        questionAnswered = true;
        // console.log("correct" + correctAnswer);
    }
@@ -133,29 +133,23 @@ window.onload = function(){
       else if (selectedRadio.val() === notRight){
 
           wrongAnswer ++;
+          notAnswered --;
           questionAnswered = true;
 
           // console.log("wrong" + wrongAnswer);
       }
+
+      // console.log("not anwswered " + notAnswered);
+
+
 });
-
-// if the radio button is unselected the add to notanswered
-
-// else {
-//
-//   //else, for question one, none are selected then  add point to not answered array
-//   notAnswered ++;
-//   // console.log("not anwswered " + notAnswered);
-//
-// }
-
-
 
 
 // =============================================================================
 //                             ON CLICK GAME
 // =============================================================================
 
+gameStart();
 
 // on click event listener
 $(".submit").on("click", function () {
