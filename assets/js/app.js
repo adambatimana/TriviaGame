@@ -1,6 +1,6 @@
 window.onload = function(){
 //Variables to be used in the game
-  var timer = 5;
+  var timer = 60;
   var intervalId;
   var timerDiv = $(".panel-body");
   var gameStage =$("#gameStage");
@@ -78,7 +78,7 @@ window.onload = function(){
     function restartGame(){
 
       // restart timer
-      timer = 90;
+      timer = 60;
       // clear score
       correctDiv.empty();
       wrongDiv.empty();
