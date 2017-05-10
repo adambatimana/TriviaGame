@@ -5,6 +5,9 @@ window.onload = function(){
   var timerDiv = $(".panel-body");
   var gameStage =$("#gameStage");
   var gameOverdiv =$("#gameOver");
+  var correctDiv = $(".correct");
+  var wrongDiv = $(".incorrect");
+  var unansweredDiv = $(".unanswered");
   var correctAnswer = 0;
   var wrongAnswer = 0;
   var notAnswered = 0;
@@ -18,7 +21,6 @@ window.onload = function(){
 
         //hide gameStage
         gameStage.hide();
-
         gameOverdiv.hide();
     }
 
@@ -59,11 +61,6 @@ window.onload = function(){
     //end of timer function gameOver()
     function gameOver() {
 
-      var correctDiv = $(".correct");
-      var wrongDiv = $(".incorrect");
-      var unansweredDiv = $(".unanswered");
-
-
       //hide gameStage
       gameStage.hide();
 
@@ -77,26 +74,26 @@ window.onload = function(){
 
     }
 
-// gameStart();
+    // restart game()
+    function restartGame(){
 
+      // restart timer
+      timer = 90;
+      // clear score
+      correctDiv.empty();
+      wrongDiv.empty();
+      unansweredDiv.empty();
 
+      correctAnswer = 0;
+      wrongAnswer = 0;
+      notAnswered = 0;
 
-// restart game()
-
-// restart timer
-// clear score
-// clear timer
-// clear selections
-
-
-
-
-//checkWin()
-
-
-
-
-
+      // clear selections on radio
+      var inp = $('input');
+        for (var i = inp.length-1; i>=0; i--) {
+          if ('radio'===inp[i].type) inp[i].checked = false;
+        }
+    }
 
 
 // ***************** IF THERE IS TIME SWAP OUT QUETSION PANELS *******************
@@ -111,37 +108,53 @@ window.onload = function(){
 ///hide gameStage and show click to begin
  $("#begin").on("click", function () {
    gameStage.show();
+   $("#begin").hide();
+
   //  runTimer();
  });
 
- $( "input" ).on( "click", function() {
+ $( "input" ).on( "click", function(event) {
 
-   var selectedRadial = $( "input:checked" );
+   var selectedRadio = $( event.target );
    var right = "correct";
    var notRight = "wrong";
+   var questionAnswered = false;
 
-   //if, for question one, the correct answer is selected add point to correct answer counter
-   console.log(selectedRadial.val());
-   if( selectedRadial.val() === right){
+      //if, for question one, the correct answer is selected add point to correct answer counter
+      console.log(selectedRadio.val());
+
+   if( selectedRadio.val() === right){
        correctAnswer ++;
+       questionAnswered = true;
        // console.log("correct" + correctAnswer);
    }
 
-    //if, for question one, the incorrect answer is selected add point to wrong answer counter
-    else if (selectedRadial.val() === notRight){
-        wrongAnswer ++;
-        // console.log("wrong" + wrongAnswer);
-    }
-    //else, for question one, none are selected then  add point to not answered array
-    else if (selectedRadial.val() != notRight ||  selectedRadial.val() != right){
-        notAnswered ++;
-        // console.log("not anwswered " + notAnswered);
-    }
+      //if, for question one, the incorrect answer is selected add point to wrong answer counter
+      else if (selectedRadio.val() === notRight){
 
+          wrongAnswer ++;
+          questionAnswered = true;
+
+          // console.log("wrong" + wrongAnswer);
+      }
 });
 
+// if the radio button is unselected the add to notanswered
+
+// else {
+//
+//   //else, for question one, none are selected then  add point to not answered array
+//   notAnswered ++;
+//   // console.log("not anwswered " + notAnswered);
+//
+// }
 
 
+
+
+// =============================================================================
+//                             ON CLICK GAME
+// =============================================================================
 
 
 // on click event listener
@@ -153,5 +166,14 @@ $(".submit").on("click", function () {
   stop();
 
 });
+
+$("#restart").on("click", function () {
+restartGame();
+gameStage.show();
+gameOverdiv.hide();
+runTimer();
+
+});
+
 
 }

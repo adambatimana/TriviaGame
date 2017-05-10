@@ -42,3 +42,7 @@ body{
 .panel {
   text-align: center;
 }
+#gameOver div{
+  padding: 1em;
+  margin-bottom: 1em;
+}
